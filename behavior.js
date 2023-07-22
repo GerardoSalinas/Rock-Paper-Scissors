@@ -1,45 +1,63 @@
-
-
 function singleRound(playerSelection, computerSelection){
     let result;
     if (playerSelection === computerSelection){
-        console.log("It's a Draw!");
-        return;
+        result = "It's a Draw!";
+        return result;
+        
     }
     switch (playerSelection) {
         case "Rock":
             if (computerSelection === "Paper"){
                 result = `You Lose! ${computerSelection} beats ${playerSelection}`;
+                computerScore++;
             }else if (computerSelection === "Scissor"){
                 result =`You Win! ${playerSelection} beats ${computerSelection}`;
+                playerScore++;
             }
             break;
-        case "Paper"://corregir
+        case "Paper":
             if (computerSelection === "Rock"){
                 result =`You Lose! ${computerSelection} beats ${playerSelection}`;
+                computerScore++;
             }else if (computerSelection === "Scissor"){
                 result =`You Win! ${playerSelection} beats ${computerSelection}`;
+                playerScore++;
             }
             break;
-        case "Scissor"://corregir
+        case "Scissor":
             if (computerSelection === "Paper"){
                 result =`You Lose! ${computerSelection} beats ${playerSelection}`;
+                computerScore++;
             }else if (computerSelection === "Rock"){
                 result =`You Win! ${playerSelection} beats ${computerSelection}`;
+                playerScore++;
             }
             break;
-        default:
+            default:
             break;
     }
     return result;
 }
 
+function game (){
+    let result;
+    for (let round = 0; round<5; round++){
+        let playerChoice = prompt("Enter your choice: ");
+        playerChoice = playerChoice.replace(playerChoice.charAt(0),playerChoice.charAt(0).toUpperCase());
+        alert(singleRound(playerChoice, getComputerChoice()));
+    }
+    (playerScore>computerScore) ? (result = `You win! [${playerScore}::${computerScore}]`):(result = `You Lose! [${playerScore}::${computerScore}]`);
+    return result;
+}
 
 function getComputerChoice (){
     const choices = ["Rock","Paper","Scissor"];
-    const randomNumber = Math.random()*(3-1)+1; //generates a random number from 1 to 3
+    const randomNumber = Math.floor(Math.random()*(2-0+1)); //generates a random number from 1 to 3
     return choices[randomNumber];
 }
 
-const playerChoice = "rock";
-console.log(singleRound(playerChoice, getComputerChoice()));
+
+let playerScore = 0;
+let computerScore = 0;
+alert(game());
+
