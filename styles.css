@@ -1,0 +1,25 @@
+/* importar la fuente */
+
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@300;400;500;600&display=swap');
+
+body {
+    font-family: 'Handjet',sans-serif;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.names {
+    display: flex;
+    font-size: 38px;
+    margin-bottom: 0px;
+}
+
+.numbers {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
