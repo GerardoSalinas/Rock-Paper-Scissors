@@ -1,3 +1,5 @@
+//funciones
+
 function singleRound(playerSelection, computerSelection){
     let result;
     if (playerSelection === computerSelection){
@@ -56,8 +58,35 @@ function getComputerChoice (){
     return choices[randomNumber];
 }
 
+/* function updateScore(){
+} */
 
+
+
+//simulacion
 let playerScore = 0;
 let computerScore = 0;
-alert(game());
+// updateScore();
+
+let numbers = document.querySelector('.numbers');
+numbers = `${playerScore}  :  ${computerScore}`;
+
+let playerImage = document.querySelector('.playerImageFile');
+
+const btnRock = document.querySelector('.Rock');
+btnRock.addEventListener('click', () => {
+    playerImage.src = "./sources/roca.png";
+});
+
+const btnPaper = document.querySelector('.Paper');
+btnPaper.addEventListener('click', () => {
+    playerImage.src = "./sources/papel.png";
+});
+
+const btnScissors = document.querySelector('.Scissors');
+btnScissors.addEventListener('click', () => {
+    playerImage.src = "./sources/tijeras.png";
+});
+
+// alert(game());
 
