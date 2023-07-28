@@ -16,10 +16,15 @@ body {
     align-items: center;
 }
 
+.score-container {
+    margin-top: 30px;
+}
+
 .names {
     display: flex;
     font-size: 40px;
     margin-bottom: 0px;
+    margin-top: 10px;
     color: black;
 }
 
@@ -27,15 +32,33 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    margin-bottom: 0px;
     font-size: 34px;
     color: black;
 }
 
-/* .main-images {
-    Agregar caracteristicas de borde
-    border: 2px;
+.main-images {
+    display: flex;
+    border: 2px solid #fcd87f;
     border-radius: 10px; 
-} */
+    justify-content: space-around;
+    margin: 30px 0px 40px 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.main-images > *{
+    display: flex;
+    width: 200px;
+    height: 200px;
+}
+
+.versus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
 
 .buttons-container {
     width: 33.33%;
@@ -47,7 +70,9 @@ body {
     display: flex;
     font-size: 24px;
     padding: 0px 10px;
-    border: 2px;
+    /* border: 2px solid #f68e6c; */
     /* Agregar color para el borde */
+    border: 2px;
+    background-color: #f68e6c;
     border-radius: 5px;
 }
