@@ -54,38 +54,50 @@ function game (){
 
 function getComputerChoice (){
     const choices = ["Rock","Paper","Scissor"];
-    const randomNumber = Math.floor(Math.random()*(2-0+1)); //generates a random number from 1 to 3
+    const randomNumber = Math.floor(Math.random()*(2-0+1)); //generates a random number from 1 to 2 (inclusive)
     return choices[randomNumber];
 }
 
-/* function updateScore(){
-} */
+function updateScore(){
+    let numbers = document.querySelector('.numbers');
+    numbers.innerHTML = `${playerScore}  :  ${computerScore}`;
+}
 
+function initialRotation (){
+    let randomPlayerIndex = Math.floor(Math.random()*(2-0+1));
+    let randomCpuIndex = Math.floor(Math.random()*(2-0+1));
+    playerImage.src = imagesPaths[randomPlayerIndex];
+    setTimeout(() => {
+        cpuImage.src = imagesPaths[randomCpuIndex];
+    },500);
 
+}
 
 //simulacion
 let playerScore = 0;
 let computerScore = 0;
-// updateScore();
+const imagesPaths = ["./sources/roca.png","./sources/papel.png","./sources/tijeras.png"];
+updateScore();
+// setInterval(initialRotation,2000);
 
-let numbers = document.querySelector('.numbers');
-numbers = `${playerScore}  :  ${computerScore}`;
+
+
 
 let playerImage = document.querySelector('.playerImageFile');
-
+let cpuImage = document.querySelector('.cpuImageFile');
 const btnRock = document.querySelector('.Rock');
 btnRock.addEventListener('click', () => {
-    playerImage.src = "./sources/roca.png";
+    playerImage.src = imagesPaths[0];
 });
 
 const btnPaper = document.querySelector('.Paper');
 btnPaper.addEventListener('click', () => {
-    playerImage.src = "./sources/papel.png";
+    playerImage.src = imagesPaths[1];
 });
 
 const btnScissors = document.querySelector('.Scissors');
 btnScissors.addEventListener('click', () => {
-    playerImage.src = "./sources/tijeras.png";
+    playerImage.src = imagesPaths[2];
 });
 
 // alert(game());
