@@ -78,27 +78,61 @@ let playerScore = 0;
 let computerScore = 0;
 const imagesPaths = ["./sources/roca.png","./sources/papel.png","./sources/tijeras.png"];
 updateScore();
-// setInterval(initialRotation,2000);
+let imagesAnimation = setInterval(initialRotation,2000);
 
-
-
-
+//divs containing images
+let playerDiv = document.querySelector('.player-image');
+let cpuDiv = document.querySelector('.CPU-image');
+//images
 let playerImage = document.querySelector('.playerImageFile');
 let cpuImage = document.querySelector('.cpuImageFile');
+//buttons
+const btnplay = document.querySelector('.play');
+btnplay.style.display = "none";
 const btnRock = document.querySelector('.Rock');
+const btnPaper = document.querySelector('.Paper');
+const btnScissors = document.querySelector('.Scissors');
+
+
+btnplay.addEventListener('click', () => {
+    //hide divs containing images
+    playerDiv.style.visibility = "hidden";
+    cpuDiv.style.visibility = "hidden";
+    //stop setInterval function
+    clearInterval(imagesAnimation);
+    //enable RPS buttons
+    btnRock.style.display = "block";
+    btnPaper.style.display = "block";
+    btnScissors.style.display = "block";
+    //diplay play => none 
+    btnplay.style.display = "none";
+});
+//hidding buttons
+btnRock.style.display = "none";
+btnplay.style.display = "block";
+btnPaper.style.display = "none";
+btnScissors.style.display = "none";
+
 btnRock.addEventListener('click', () => {
+    playerDiv.style.visibility = "visible";
+    cpuDiv.style.visibility = "visible";
     playerImage.src = imagesPaths[0];
 });
 
-const btnPaper = document.querySelector('.Paper');
 btnPaper.addEventListener('click', () => {
+    playerDiv.style.visibility = "visible";
+    cpuDiv.style.visibility = "visible";
     playerImage.src = imagesPaths[1];
 });
 
-const btnScissors = document.querySelector('.Scissors');
 btnScissors.addEventListener('click', () => {
+    playerDiv.style.visibility = "visible";
+    cpuDiv.style.visibility = "visible";
     playerImage.src = imagesPaths[2];
 });
+
+
+
 
 // alert(game());
 
