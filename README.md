@@ -16,4 +16,8 @@ Finalmente, se agregarán algunas animaciones a las imagenes cuando una gane el 
 ## Images:
 * rock: <a href="https://www.flaticon.es/iconos-gratis/roca" title="roca iconos">Roca iconos creados por Freepik - Flaticon</a>
 * papel: <a href="https://www.flaticon.es/iconos-gratis/papel" title="papel iconos">Papel iconos creados por Freepik - Flaticon</a>
-* tijeras: <a href="https://www.flaticon.es/iconos-gratis/tijeras" title="tijeras iconos">Tijeras iconos creados por Freepik - Flaticon</a>
+* tijeras: <a href="https://www.flaticon.es/iconos-gratis/tijeras" title="tijeras iconos">Tijeras iconos creados por Freepik - Flaticon</a>  
+
+## Final Result
+![finalResult](./final_result/RPS-image1.png "final Result")
+![finalResult](./final_result/RPS-image2.png "final Resut")
