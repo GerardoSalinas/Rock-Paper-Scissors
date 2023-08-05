@@ -1,61 +1,41 @@
 //funciones
 
 function singleRound(playerSelection, computerSelection){
-    let result;
     if (playerSelection === computerSelection){
-        result = "It's a Draw!";
-        return result;
+        return ;
         
     }
     switch (playerSelection) {
-        case "Rock":
-            if (computerSelection === "Paper"){
-                result = `You Lose! ${computerSelection} beats ${playerSelection}`;
+        case 0:
+            if (computerSelection === 1){
                 computerScore++;
-            }else if (computerSelection === "Scissor"){
-                result =`You Win! ${playerSelection} beats ${computerSelection}`;
+            }else if (computerSelection === 2){
                 playerScore++;
             }
             break;
-        case "Paper":
-            if (computerSelection === "Rock"){
-                result =`You Lose! ${computerSelection} beats ${playerSelection}`;
+        case 1:
+            if (computerSelection === 0){
                 computerScore++;
-            }else if (computerSelection === "Scissor"){
-                result =`You Win! ${playerSelection} beats ${computerSelection}`;
+            }else if (computerSelection === 2){
                 playerScore++;
             }
             break;
-        case "Scissor":
-            if (computerSelection === "Paper"){
-                result =`You Lose! ${computerSelection} beats ${playerSelection}`;
+        case 2:
+            if (computerSelection === 2){
                 computerScore++;
-            }else if (computerSelection === "Rock"){
-                result =`You Win! ${playerSelection} beats ${computerSelection}`;
+            }else if (computerSelection === 0){
                 playerScore++;
             }
             break;
             default:
             break;
     }
-    return result;
 }
 
-function game (){
-    let result;
-    for (let round = 0; round<5; round++){
-        let playerChoice = prompt("Enter your choice: ");
-        playerChoice = playerChoice.replace(playerChoice.charAt(0),playerChoice.charAt(0).toUpperCase());
-        alert(singleRound(playerChoice, getComputerChoice()));
-    }
-    (playerScore>computerScore) ? (result = `You win! [${playerScore}::${computerScore}]`):(result = `You Lose! [${playerScore}::${computerScore}]`);
-    return result;
-}
 
 function getComputerChoice (){
-    const choices = ["Rock","Paper","Scissor"];
-    const randomNumber = Math.floor(Math.random()*(2-0+1)); //generates a random number from 1 to 2 (inclusive)
-    return choices[randomNumber];
+    let randomNumber = Math.floor(Math.random()*(2-0+1)); //generates a random number from 1 to 2 (inclusive)
+    return randomNumber;
 }
 
 function updateScore(){
@@ -73,16 +53,52 @@ function initialRotation (){
 
 }
 
+
+function determinePlayerstatus (){
+    if (playerScore === 5){
+        return true;
+    }else if (computerScore === 5){
+        return false;
+    }
+}
+function result (playerStatus){
+    if (playerStatus !== undefined) {
+        playerDiv.style.visibility = "hidden";
+        cpuDiv.style.visibility = "hidden";
+        if (playerStatus === true){
+            //cambiar "vs" a "You Win!"
+            vsDiv.innerHTML = "You Win!";
+            //cambiar el tamanio de la fuente
+            vsDiv.style.cssText = 'color: #09b125;font-size: 38px; font-weight: 600';
+            //ocultar los botones de RPS
+            btnRock.style.display = "none";
+            btnPaper.style.display = "none";
+            btnScissors.style.display = "none";
+            //mostrar el boton de "PLAY"
+            btnplay.style.display = "block";
+        }else if(playerStatus === false){
+            vsDiv.innerHTML = "You Lose!";
+            vsDiv.style.cssText = 'color: #bb2e1c;font-size: 38px; font-weight: 600';
+            btnRock.style.display = "none";
+            btnPaper.style.display = "none";
+            btnScissors.style.display = "none";
+            btnplay.style.display = "block";
+        }
+    }
+
+
+}
 //simulacion
 let playerScore = 0;
 let computerScore = 0;
-const imagesPaths = ["./sources/roca.png","./sources/papel.png","./sources/tijeras.png"];
-updateScore();
-let imagesAnimation = setInterval(initialRotation,2000);
+let playerChoice = -1;
+let playerWins;
 
+const imagesPaths = ["./sources/roca.png","./sources/papel.png","./sources/tijeras.png"];
 //divs containing images
 let playerDiv = document.querySelector('.player-image');
 let cpuDiv = document.querySelector('.CPU-image');
+let vsDiv = document.querySelector('.versus');
 //images
 let playerImage = document.querySelector('.playerImageFile');
 let cpuImage = document.querySelector('.cpuImageFile');
@@ -93,8 +109,16 @@ const btnRock = document.querySelector('.Rock');
 const btnPaper = document.querySelector('.Paper');
 const btnScissors = document.querySelector('.Scissors');
 
+updateScore();
+let imagesAnimation = setInterval(initialRotation,2000);
+
+
+
+
 
 btnplay.addEventListener('click', () => {
+    //cambiar vs div para que no quede remanente de la partida anterior
+    vsDiv.style.cssText = 'color: #000000; font-size: 24px; font-weight: 400';
     //hide divs containing images
     playerDiv.style.visibility = "hidden";
     cpuDiv.style.visibility = "hidden";
@@ -107,31 +131,43 @@ btnplay.addEventListener('click', () => {
     //diplay play => none 
     btnplay.style.display = "none";
 });
-//hidding buttons
-btnRock.style.display = "none";
-btnplay.style.display = "block";
-btnPaper.style.display = "none";
-btnScissors.style.display = "none";
 
-btnRock.addEventListener('click', () => {
-    playerDiv.style.visibility = "visible";
-    cpuDiv.style.visibility = "visible";
+btnRock.addEventListener('click', () => {//arreglada la logica
     playerImage.src = imagesPaths[0];
+    playerDiv.style.visibility = "visible";
+    let computerChoice = getComputerChoice();
+    singleRound(0, computerChoice);
+    updateScore();
+    cpuImage.src = imagesPaths[computerChoice];
+    cpuDiv.style.visibility = "visible";
+    //check for winner
+    playerWins = determinePlayerstatus();
+    result(playerWins);
+
+
 });
 
 btnPaper.addEventListener('click', () => {
+    playerImage.src = imagesPaths[1];
     playerDiv.style.visibility = "visible";
     cpuDiv.style.visibility = "visible";
-    playerImage.src = imagesPaths[1];
+    playerChoice = 1;
+    singleRound(playerChoice, computerSelection);
 });
 
 btnScissors.addEventListener('click', () => {
     playerDiv.style.visibility = "visible";
     cpuDiv.style.visibility = "visible";
     playerImage.src = imagesPaths[2];
+    playerChoice = 2;
+    singleRound(playerChoice, computerSelection);
 });
 
-
+//hidding buttons
+btnRock.style.display = "none";
+btnplay.style.display = "block";
+btnPaper.style.display = "none";
+btnScissors.style.display = "none";
 
 
 // alert(game());
