@@ -6,24 +6,24 @@ function singleRound(playerSelection, computerSelection){
         
     }
     switch (playerSelection) {
-        case 0:
-            if (computerSelection === 1){
+        case 0: //roca
+            if (computerSelection === 1){//papel
                 computerScore++;
-            }else if (computerSelection === 2){
+            }else if (computerSelection === 2){//tijera
                 playerScore++;
             }
             break;
-        case 1:
-            if (computerSelection === 0){
-                computerScore++;
-            }else if (computerSelection === 2){
+        case 1: //papel
+            if (computerSelection === 0){//roca
                 playerScore++;
+            }else if (computerSelection === 2){//tijera
+                computerScore++;
             }
             break;
-        case 2:
-            if (computerSelection === 2){
+        case 2: //tijera
+            if (computerSelection === 0){//roca
                 computerScore++;
-            }else if (computerSelection === 0){
+            }else if (computerSelection === 1){//papel
                 playerScore++;
             }
             break;
@@ -118,6 +118,10 @@ let imagesAnimation = setInterval(initialRotation,2000);
 
 btnplay.addEventListener('click', () => {
     //cambiar vs div para que no quede remanente de la partida anterior
+    playerScore = 0;
+    computerScore = 0;
+    updateScore();
+    vsDiv.innerHTML = "VS";
     vsDiv.style.cssText = 'color: #000000; font-size: 24px; font-weight: 400';
     //hide divs containing images
     playerDiv.style.visibility = "hidden";
@@ -135,7 +139,7 @@ btnplay.addEventListener('click', () => {
 btnRock.addEventListener('click', () => {//arreglada la logica
     playerImage.src = imagesPaths[0];
     playerDiv.style.visibility = "visible";
-    let computerChoice = getComputerChoice();
+    computerChoice = getComputerChoice();
     singleRound(0, computerChoice);
     updateScore();
     cpuImage.src = imagesPaths[computerChoice];
@@ -147,20 +151,28 @@ btnRock.addEventListener('click', () => {//arreglada la logica
 
 });
 
-btnPaper.addEventListener('click', () => {
+btnPaper.addEventListener('click', () => {//ready
     playerImage.src = imagesPaths[1];
     playerDiv.style.visibility = "visible";
+    computerChoice = getComputerChoice();
+    singleRound(1, computerChoice);
+    updateScore();
+    cpuImage.src = imagesPaths[computerChoice];
     cpuDiv.style.visibility = "visible";
-    playerChoice = 1;
-    singleRound(playerChoice, computerSelection);
+    playerWins = determinePlayerstatus();
+    result(playerWins);
 });
 
 btnScissors.addEventListener('click', () => {
-    playerDiv.style.visibility = "visible";
-    cpuDiv.style.visibility = "visible";
     playerImage.src = imagesPaths[2];
-    playerChoice = 2;
-    singleRound(playerChoice, computerSelection);
+    playerDiv.style.visibility = "visible";
+    computerChoice = getComputerChoice();
+    singleRound(2, computerChoice);
+    updateScore();
+    cpuImage.src = imagesPaths[computerChoice];
+    cpuDiv.style.visibility = "visible";
+    playerWins = determinePlayerstatus();
+    result(playerWins);
 });
 
 //hidding buttons
