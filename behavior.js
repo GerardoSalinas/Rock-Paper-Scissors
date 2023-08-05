@@ -6,24 +6,24 @@ function singleRound(playerSelection, computerSelection){
         
     }
     switch (playerSelection) {
-        case 0: //roca
-            if (computerSelection === 1){//papel
+        case 0: 
+            if (computerSelection === 1){
                 computerScore++;
-            }else if (computerSelection === 2){//tijera
+            }else if (computerSelection === 2){
                 playerScore++;
             }
             break;
-        case 1: //papel
-            if (computerSelection === 0){//roca
+        case 1: 
+            if (computerSelection === 0){
                 playerScore++;
-            }else if (computerSelection === 2){//tijera
+            }else if (computerSelection === 2){
                 computerScore++;
             }
             break;
-        case 2: //tijera
-            if (computerSelection === 0){//roca
+        case 2: 
+            if (computerSelection === 0){
                 computerScore++;
-            }else if (computerSelection === 1){//papel
+            }else if (computerSelection === 1){
                 playerScore++;
             }
             break;
@@ -34,7 +34,7 @@ function singleRound(playerSelection, computerSelection){
 
 
 function getComputerChoice (){
-    let randomNumber = Math.floor(Math.random()*(2-0+1)); //generates a random number from 1 to 2 (inclusive)
+    let randomNumber = Math.floor(Math.random()*(2-0+1)); 
     return randomNumber;
 }
 
@@ -117,26 +117,21 @@ let imagesAnimation = setInterval(initialRotation,2000);
 
 
 btnplay.addEventListener('click', () => {
-    //cambiar vs div para que no quede remanente de la partida anterior
     playerScore = 0;
     computerScore = 0;
     updateScore();
     vsDiv.innerHTML = "VS";
     vsDiv.style.cssText = 'color: #000000; font-size: 24px; font-weight: 400';
-    //hide divs containing images
     playerDiv.style.visibility = "hidden";
     cpuDiv.style.visibility = "hidden";
-    //stop setInterval function
     clearInterval(imagesAnimation);
-    //enable RPS buttons
     btnRock.style.display = "block";
     btnPaper.style.display = "block";
     btnScissors.style.display = "block";
-    //diplay play => none 
     btnplay.style.display = "none";
 });
 
-btnRock.addEventListener('click', () => {//arreglada la logica
+btnRock.addEventListener('click', () => {
     playerImage.src = imagesPaths[0];
     playerDiv.style.visibility = "visible";
     computerChoice = getComputerChoice();
@@ -144,14 +139,13 @@ btnRock.addEventListener('click', () => {//arreglada la logica
     updateScore();
     cpuImage.src = imagesPaths[computerChoice];
     cpuDiv.style.visibility = "visible";
-    //check for winner
     playerWins = determinePlayerstatus();
     result(playerWins);
 
 
 });
 
-btnPaper.addEventListener('click', () => {//ready
+btnPaper.addEventListener('click', () => {
     playerImage.src = imagesPaths[1];
     playerDiv.style.visibility = "visible";
     computerChoice = getComputerChoice();
@@ -175,12 +169,10 @@ btnScissors.addEventListener('click', () => {
     result(playerWins);
 });
 
-//hidding buttons
 btnRock.style.display = "none";
 btnplay.style.display = "block";
 btnPaper.style.display = "none";
 btnScissors.style.display = "none";
 
 
-// alert(game());
 
